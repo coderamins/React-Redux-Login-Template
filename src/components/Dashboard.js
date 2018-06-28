@@ -23,11 +23,17 @@ class Dashboard extends Component {
     }
 }
 
-const select = state => ({
-    contacts: state,
-    session: state.session,
-    search: state
-});
+const mapStateToProps = (state, ownProps) => {
+    return {
+        route: state.session
+    };
+}
 
-export default connect(select)(Dashboard);
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+
+
+export default connect(mapDispatchToProps, mapStateToProps)(Dashboard);
 

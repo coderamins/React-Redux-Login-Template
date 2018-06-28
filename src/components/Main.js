@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
-import { connect } from 'react-redux';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import Registration from './Registration';
+
+
 const { Content } = Layout;
 
 
@@ -22,6 +25,7 @@ class Main extends Component {
                         <Switch>
                             <Route exact={true} path='/' component={Login} />
                             <Route path='/dash' component={Dashboard} />
+                            <Route path='/register' component={Registration} />
                         </Switch>
                     </Router>
                 </Content>
@@ -30,8 +34,15 @@ class Main extends Component {
     }
 }
 
-const select = state => ({
-    toasts: state
-});
+const mapStateToProps = (state, ownProps) => {
+    return {
+        route: state
+    };
+}
 
-export default connect(select)(Main);
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+
+export default connect(mapDispatchToProps, mapStateToProps)(Main);

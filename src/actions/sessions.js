@@ -15,13 +15,19 @@ export function initialize() {
     };
 }
 
-export function login(user, password, done) {
+export function login(userData) {
     const payload = {
-        user: user,
+        user: userData.username,
+        password: userData.password
     };
-    return (
-        dispatch({ type: SESSION_LOGIN, payload })
-    );
+    return (dispatch)=> {
+        dispatch({type: SESSION_LOGIN, payload})
+            .then(window.location = '/dash')
+            .catch((e)=>{
+                console.log(e);
+                window.location = '/';
+            });
+    };
 }
 
 export function logout() {

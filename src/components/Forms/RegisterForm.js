@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const FormItem = Form.Item;
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ class LoginForm extends Component {
 
             }
         });
-        
+
     }
 
     render() {
@@ -57,10 +57,10 @@ class LoginForm extends Component {
 
 }
 
-const NormalLoginForm = Form.create()(LoginForm);
+const SignupForm = Form.create()(RegisterForm);
 
 const select = state => ({
     session: state.session
 });
 
-export default connect(select)(NormalLoginForm);
+export default connect(select)(SignupForm);

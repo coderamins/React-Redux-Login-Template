@@ -2,16 +2,31 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {Row, Col, Divider} from 'antd';
-import NormalLoginForm from './LoginForm';
+import NormalLoginForm from './Forms/LoginForm';
 
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            username: '',
+            password: '',
+        }
 
     }
 
+    updateUser=(e)=>{
+        //console.log(e.target.value);
+        this.setState({
+            username: e.target.value
+        });
+    }
 
-
+    updatePass=(e)=>{
+        //console.log(e.target.value);
+        this.setState({
+            password: e.target.value
+        });
+    }
 
     render() {
 
@@ -24,7 +39,9 @@ class Login extends Component {
                 </Col>
                 <Col span={10}>
                     <Divider orientation="left"><h2>Login</h2></Divider>
-                    <NormalLoginForm />
+                    <NormalLoginForm username={this.state.username} password={this.state.password}
+                                     updateUser={this.updateUser} updatePass={this.updatePass}
+                    />
                 </Col>
             </Row>
         );
@@ -35,8 +52,17 @@ Login.contextTypes = {
     router: PropTypes.object.isRequired,
 };
 
-const select = state => ({
-    session: state.session
-});
+const mapStateToProps = (state, ownProps) => {
+    return {
+        route: state.session
+    };
+}
 
-export default connect(select)(Login);
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
