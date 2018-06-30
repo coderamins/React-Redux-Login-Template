@@ -36,7 +36,6 @@ class Main extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        route: state
     };
 }
 

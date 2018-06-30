@@ -8,15 +8,9 @@ const FormItem = Form.Item;
 
 class LoginForm extends Component {
 
-
-
     handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(e.target.value);
-        console.log(this.props);
-        const { dispatch } = this.props;
-        const { router } = this.context;
-        dispatch(login(this.props));
+        this.props.onLogin(this.props, ()=>{window.location('/dash')});
 
     }
 

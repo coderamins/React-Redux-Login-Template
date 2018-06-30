@@ -1,38 +1,24 @@
-import { SESSION_LOAD, SESSION_LOGIN, SESSION_LOGOUT } from '../actions';
+import { SESSION_LOGIN, SESSION_LOGOUT, SESSION_ERROR } from './index';
 
-const localStorage = window.localStorage;
+export function loginError(error) {
+    return { error, type: SESSION_ERROR };
+}
 
-export function initialize() {
-    return (dispatch) => {
-        const { email, name, token } = localStorage;
-        if (email && token) {
-            dispatch({
-                type: SESSION_LOAD, payload: { email, name, token }
-            });
-        } else {
-            window.location = '/';
-        }
+export function loginSuccess(response) {
+    return dispatch => {
+        dispatch({ response, type: SESSION_LOGIN});
     };
 }
 
-export function login(userData) {
-    const payload = {
-        user: userData.username,
-        password: userData.password
-    };
-    return (dispatch)=> {
-        dispatch({type: SESSION_LOGIN, payload})
-            .then(window.location = '/dash')
-            .catch((e)=>{
-                console.log(e);
-                window.location = '/';
-            });
+export function loginRequest(user, password) {
+    const _user = {user: user, password: password};
+    return { _user, type: "LOGIN_ATTEMPT" };
+}
+
+export function logoutRequest(cb) {
+    cb();
+    return dispatch => {
+        dispatch({type: SESSION_LOGOUT});
     };
 }
 
-export function logout() {
-    return (dispatch) => {
-        dispatch({ type: SESSION_LOGOUT });
-        window.location.href = '/';
-    };
-}

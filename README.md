@@ -11,7 +11,7 @@ To run this project, run:
 
 The project should be located at [localhost](http://localhost:3000/).
 
-##Things of Note
+## Things of Note
 
 - yarn is not currently included becuase there are currently issues with installing Ant Design (at least I'm having issues)
 - have not added a signup/registration nor forgot password. That will be added in later
