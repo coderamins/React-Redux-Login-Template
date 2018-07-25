@@ -1,21 +1,22 @@
 import { loginSuccess, loginError } from '../actions/sessions';
 import { registerSuccess, registerError } from '../actions/register';
 import { parseJSON } from "./utils";
+import API from './CONFIG';
 
 export function login(userData, cb) {
     console.log(userData);
     return dispatch =>
-        fetch('http://127.0.0.1:8000/api/rest-auth/login/', {
+        fetch(API.BASE + 'rest-auth/login/', {
             method: "POST",
             mode: "cors",
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: {
+            body: JSON.stringify({
                 "username": userData.username,
                 //'email': null,
                 "password": userData.password,
-            },
+            }),
         }).then(response => {
             //console.log(response);
             //debugger;
@@ -25,13 +26,6 @@ export function login(userData, cb) {
                 cb();
                 //console.log('ran callback function');
             }
-            //else {
-            //     //console.log('false');
-            //     const error = new Error(response.statusText);
-            //     error.response = response;
-            //     dispatch(loginError(error));
-            //     throw error;
-            // }
         })
             .catch(error => {
                 console.log('request failed', error);
@@ -43,7 +37,7 @@ export function login(userData, cb) {
 
 export function signup(userData){
     return dispatch =>
-        fetch('http://api.realsafe.io/Agent/Create?email='+ userData.email + '&password=' + userData.password + '&fullname=' + userData.name, {
+        fetch(API.BASE + '?email='+ userData.email + '&password=' + userData.password + '&fullname=' + userData.name, {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
