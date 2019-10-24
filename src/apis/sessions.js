@@ -1,7 +1,7 @@
 import { loginSuccess, loginError } from '../actions/sessions';
 import { registerSuccess, registerError } from '../actions/register';
 import { parseJSON } from "./utils";
-import API from './CONFIG';
+import { API } from './CONFIG';
 
 export function login(userData, cb) {
     console.log(userData);
